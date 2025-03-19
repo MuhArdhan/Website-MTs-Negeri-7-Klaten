@@ -1,11 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>audbhfjakn</h1>
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+{% load static %}
+<body class="bg-gray-100">
+    <!-- Hero Section -->
+    <section class="bg-cover bg-center h-screen flex items-center justify-center" style="background-image: url('https://unsplash.com/photos/american-football-stadium-with-people-Xy-F5GptgR8');">
+        <div class="text-center text-white bg-black bg-opacity-50 p-6 rounded-lg">
+            <h1 class="text-4xl font-bold">Selamat Datang di MTs Negeri 7 Klaten</h1>
+            <p class="mt-2">Sekolah Unggulan dengan Prestasi Gemilang</p>
+            <a href="#" class="mt-4 inline-block bg-blue-500 px-6 py-2 rounded-lg">Selengkapnya</a>
+        </div>
+    </section>
+
+    <!-- Berita Terbaru -->
+    <section class="container mx-auto py-10">
+        <h2 class="text-3xl font-bold text-center">Berita Terbaru</h2>
+        <div class="grid md:grid-cols-3 gap-6 mt-6">
+            <div class="bg-white shadow-lg p-4 rounded-lg">
+                <h3 class="text-xl font-bold">Judul Berita 1</h3>
+                <p class="text-gray-600">Ringkasan berita singkat...</p>
+                <a href="#" class="text-blue-500 hover:underline">Baca selengkapnya</a>
+            </div>
+            <div class="bg-white shadow-lg p-4 rounded-lg">
+                <h3 class="text-xl font-bold">Judul Berita 2</h3>
+                <p class="text-gray-600">Ringkasan berita singkat...</p>
+                <a href="#" class="text-blue-500 hover:underline">Baca selengkapnya</a>
+            </div>
+            <div class="bg-white shadow-lg p-4 rounded-lg">
+                <h3 class="text-xl font-bold">Judul Berita 3</h3>
+                <p class="text-gray-600">Ringkasan berita singkat...</p>
+                <a href="#" class="text-blue-500 hover:underline">Baca selengkapnya</a>
+            </div>
+        </div>
+    </section>
+
 </body>
-</html>
+{% endblock %}
