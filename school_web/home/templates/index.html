@@ -2,13 +2,16 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 {% load static %}
+
 <body class="bg-gray-100">
-    <!-- Hero Section -->
-    <section class="bg-cover bg-center h-screen flex items-center justify-center" style="background-image: url('https://unsplash.com/photos/american-football-stadium-with-people-Xy-F5GptgR8');">
-        <div class="text-center text-white bg-black bg-opacity-50 p-6 rounded-lg">
-            <h1 class="text-4xl font-bold">Selamat Datang di MTs Negeri 7 Klaten</h1>
-            <p class="mt-2">Sekolah Unggulan dengan Prestasi Gemilang</p>
-            <a href="#" class="mt-4 inline-block bg-blue-500 px-6 py-2 rounded-lg">Selengkapnya</a>
+    <!-- Hero Section with Parallax Effect -->
+    <section class="relative w-full h-screen bg-fixed bg-center bg-cover flex flex-col justify-center items-center text-center" style="background-image: url('{% static "assets/img/hero.jpeg" %}');">
+        <h1 class="text-5xl font-bold text-white drop-shadow-lg" style="text-shadow: 2px 2px 4px black;">MTs NEGERI 7 KLATEN</h1>
+        <div class="mt-4 w-full flex justify-center">
+            <div class="flex bg-white shadow-lg rounded-full w-1/2 p-3 items-center">
+                <input type="text" placeholder="Cari..." class="flex-1 outline-none px-4 py-2 rounded-full">
+                <button class="bg-gray-800 text-white font-bold px-6 py-2 rounded-full">Cari</button>
+            </div>
         </div>
     </section>
 
@@ -33,6 +36,5 @@
             </div>
         </div>
     </section>
-
 </body>
 {% endblock %}
