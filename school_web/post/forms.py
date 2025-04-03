@@ -4,7 +4,7 @@ from home.models import Post
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'slug', 'body', 'publish', 'status', 'category', 'image', 'tags']
+        fields = ['title', 'slug', 'body', 'publish', 'status', 'category', 'image']
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter title'}),
@@ -13,7 +13,6 @@ class PostForm(forms.ModelForm):
             'publish': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control', 'readonly': 'readonly'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
-            'tags': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter tags'}),
             'image': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
         }
 
