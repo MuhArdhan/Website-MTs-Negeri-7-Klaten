@@ -1,0 +1,48 @@
+<!-- post_create.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2 class="mb-4">Create a New Post</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        {{ form.title.label_tag }}
+        {{ form.title }}
+      </div>
+      <div class="form-group">
+        {{ form.slug.label_tag }}
+        {{ form.slug }}
+      </div>
+      <div class="form-group">
+        {{ form.author.label_tag }}
+        {{ form.author }}
+      </div>
+      <div class="form-group">
+        {{ form.body.label_tag }}
+        {{ form.body }}
+      </div>
+      <div class="form-group">
+        {{ form.publish.label_tag }}
+        {{ form.publish }}
+      </div>
+      <div class="form-group">
+        {{ form.status.label_tag }}
+        {{ form.status }}
+      </div>
+      <div class="form-group">
+        {{ form.category.label_tag }}
+        {{ form.category }}
+      </div>
+      <div class="form-group">
+        {{ form.tags.label_tag }}
+        {{ form.tags }}
+      </div>
+      <div class="form-group m-3">
+        {{ form.image.label_tag }}
+        {{ form.image }}
+      </div>
+      <button type="submit" class="btn btn-primary mb-4">Save Post</button>
+    </form>
+  </div>
+{% endblock %}

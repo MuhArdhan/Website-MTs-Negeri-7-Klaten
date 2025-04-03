@@ -16,25 +16,41 @@
     </section>
 
     <!-- Berita Terbaru -->
-    <section class="container mx-auto py-10">
-        <h2 class="text-3xl font-bold text-center">Berita Terbaru</h2>
-        <div class="grid md:grid-cols-3 gap-6 mt-6">
-            <div class="bg-white shadow-lg p-4 rounded-lg">
-                <h3 class="text-xl font-bold">Judul Berita 1</h3>
-                <p class="text-gray-600">Ringkasan berita singkat...</p>
-                <a href="#" class="text-blue-500 hover:underline">Baca selengkapnya</a>
+    <section id="trending-category" class="py-12">
+    <div class="container mx-auto px-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {% for post in post %}
+        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <a href="{{ post.get_absolute_url }}">
+            <img src="{{ post.image.url }}" alt="" class="w-full h-48 object-cover">
+            </a>
+            <div class="p-4">
+            <div class="text-sm text-gray-500">
+                <span class="text-blue-600 font-semibold">{{ post.category }}</span>
+                <span class="mx-1">•</span>
+                <span>{{ post.publish }}</span>
             </div>
-            <div class="bg-white shadow-lg p-4 rounded-lg">
-                <h3 class="text-xl font-bold">Judul Berita 2</h3>
-                <p class="text-gray-600">Ringkasan berita singkat...</p>
-                <a href="#" class="text-blue-500 hover:underline">Baca selengkapnya</a>
+            <h2 class="text-lg font-semibold mt-2">
+                <a href="{{ post.get_absolute_url }}" class="text-gray-800 hover:text-blue-600">{{ post.title }}</a>
+            </h2>
+            <p class="text-sm text-gray-600 mt-1">Tags: {{ post.tags.all|join:", " }}</p>
+            <p class="text-gray-700 mt-2">{{ post.body|truncatewords:20 }}</p>
+            <div class="flex items-center mt-4">
+                {% if post.author.profile.image %}
+                <img src="{{ post.author.profile.image.url }}" alt="" class="w-10 h-10 rounded-full object-cover">
+                {% else %}
+                <img src="{% static 'assets/default.jpg' %}" alt="" class="w-10 h-10 rounded-full object-cover">
+                {% endif %}
+                <div class="ml-3">
+                <h3 class="text-sm font-semibold text-gray-800">{{ post.author }}</h3>
+                </div>
             </div>
-            <div class="bg-white shadow-lg p-4 rounded-lg">
-                <h3 class="text-xl font-bold">Judul Berita 3</h3>
-                <p class="text-gray-600">Ringkasan berita singkat...</p>
-                <a href="#" class="text-blue-500 hover:underline">Baca selengkapnya</a>
             </div>
         </div>
+        {% endfor %}
+        </div>
+    </div>
     </section>
+
 </body>
 {% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+{% load static %}
+<section class="py-5">
+    <div class="container px-5">
+        <div class="row gx-5">
+            <!-- Blog Content -->
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bolder">{{ post.title }}</h1>
+                <p class="lead">{{ post.publish }}</p>
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid mb-4">
+                <p>{{ post.body|linebreaks }}</p>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="widgets-container">
+
+                    {% if post.author == user or user.is_superuser %}
+                    <div class="d-flex justify-content-end mb-3">
+                        <form action="{% url 'article:post_update' post.publish.year post.publish.month post.publish.day post.slug %}" method="post" class="m-0 me-3">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-pencil"></i> Update Post
+                            </button>
+                        </form>
+                        <form action="{% url 'article:post_delete' post.publish.year post.publish.month post.publish.day post.slug %}" method="post" class="m-0">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-trash-fill"></i> Delete Post
+                            </button>
+                        </form>
+                    </div>
+                    {% endif %}
+
+                    <!-- Blog Author Widget 2 -->
+                    <div class="blog-author-widget-2 widget-item">
+                        <div class="d-flex flex-column align-items-center">
+                            {% if post.author.profile.profile_picture %}
+                                <img src="{{ post.author.profile.profile_picture.url }}" alt="{{ post.author.username }}" class="rounded-circle flex-shrink-0">
+                            {% else %}
+                                <!-- Jika tidak ada foto profil, tampilkan gambar default -->
+                            <img src="{% static 'assets/default.jpg' %}" alt="{{ post.author.username }}" class="rounded-circle flex-shrink-0">
+                            {% endif %}
+                            <h4>{{ post.author }}</h4>
+                            <div class="social-links">
+                                <a href="https://x.com/#"><i class="bi bi-twitter-x"></i></a>
+                                <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
+                                <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
+                                <a href="https://linkedin.com/#"><i class="biu bi-linkedin"></i></a>
+                            </div>
+                            <p>
+                                Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium. 
+                                Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium ut unde voluptas.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Tags Widget -->
+                    <div class="tags-widget widget-item">
+                        <h3 class="widget-title">Tags</h3>
+                        <ul>
+                            {% for tag in post.tags.all %}
+                            <li><a href="">{{ tag }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2 class="h4">{{ comments.count }} comment{{ comments.count|pluralize }}</h2>
+                {% for comment in comments %}
+                    <div class="comment mb-4 p-3 border rounded" style="padding-left: 15px; padding-right: 15px;">
+                        <p class="info mb-1"><strong>Comment by {{ comment.user.username }}</strong> on {{ comment.created }}</p>
+                        <p>{{ comment.body|linebreaks }}</p>
+                    </div>
+                {% empty %}
+                    <p>There are no comments.</p>
+                {% endfor %}
+
+                {% include 'post/commentpagination.html' with page=comments %}
+
+                <h2>Add a new comment</h2>
+                <form action="{% url 'article:post_comment' post.id %}" method="post">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <p><input type="submit" value="Add comment"></p>
+                </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

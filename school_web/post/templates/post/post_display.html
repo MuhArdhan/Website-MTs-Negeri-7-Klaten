@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Category{% endblock %}
+{% block content %}
+  <main class="main">
+    <div class="container my-2">
+      <div class="row mt-3">
+        <div class="col-md-6">
+          <div class="d-flex align-items-center">
+            <select class="form-select w-25" id="filter-by">
+              <option value="" disabled selected>Filter by...</option>
+              <option value='category'>Category</option>
+              <option value='tag'>Tag</option>
+              <option value='author'>Author</option>
+              <option value='date'>Date</option>
+            </select>
+            <!-- Placeholder for dynamic filter options -->
+            <div id="additional-filter" class="d-flex align-items-center ms-2"></div> 
+            <a href="#" id='clear-filter' class="ms-2">Clear</a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex justify-content-end">
+            <div class="input-group">
+              <input type="text" class="form-control" id='search-title-input' placeholder="Search title">
+            </div>
+            <select class="form-select w-25" id="sort-select" >
+              <option value='' disabled selected>Sort by</option>
+              <option value='date_desc'>Date: Terbaru</option>
+              <option value='date_asc'>Date: Terlama</option>
+              <option value='comment_desc'>Comment: Terbanyak</option>
+              <option value='comment_asc'>Comment: Tersedikit</option>
+              <option value='title_asc'>Title: A - Z</option>
+              <option value='title_desc'>Title: Z - A</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-8">
+
+          <!-- Blog Posts Section -->
+          <section id="blog-posts" class="blog-posts section">
+
+            <div class="container">
+              <div class="row gy-4" id='post-list'>
+
+                {% for post in posts %}
+                <div class="col-lg-6">
+                  <article class="position-relative h-100">
+
+                    <div class="post-img position-relative overflow-hidden">
+                      <img src="{{ post.image.url }}" class="img-fluid" alt="">
+                      <span class="post-date">{{ post.publish|date:'Y-m-d' }}</span>
+                    </div>
+                    <div class="post-content d-flex flex-column">
+
+                      <h3 class="post-title">{{ post.title }}</h3>
+                      
+                      <div class="meta d-flex align-items-center">
+                        <div class="d-flex align-items-center">
+                          <i class="bi bi-person"></i> <span class="ps-2">{{ post.author }}</span>
+                        </div>
+                        <span class="px-3 text-black-50">/</span>
+                        <div class="d-flex align-items-center">
+                          <i class="bi bi-folder2"></i> <span class="ps-2">{{ post.category }}</span>
+                        </div>
+                      </div>
+                        
+                      <p>
+                        {{ post.body|truncatewords:20 }}
+                      </p>
+                      
+                      <p class="tags">Tags: {{ post.tags.all|join:", " }}</p>
+                      <hr>
+                      
+                      <a href="{{ post.get_absolute_url }}" class="readmore stretched-link"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                      
+                    </div>
+                    
+                  </article>
+                </div><!-- End post list item -->
+                {% endfor %}
+
+              </div>
+            </div>
+
+          </section><!-- /Blog Posts Section -->
+
+          <!-- Blog Pagination Section -->
+          <section id="blog-pagination" class="blog-pagination section">          
+            {% include 'post/paging.html' with page=posts %}
+          </section><!-- /Blog Pagination Section -->
+          
+        </div>
+        
+        <div class="col-lg-4 sidebar">
+          
+          <div class="widgets-container">
+            <!-- Recent Posts Widget -->
+            <div class="recent-posts-widget widget-item">
+
+              <h3 class="widget-title">Recent Posts</h3>
+
+              {% for post in recent_posts %}
+              <div class="post-item">
+                <img src="{{ post.image.url }}" alt="" class="flex-shrink-0">
+                <div>
+                  <h4>{{ post.title }}</a></h4>
+                  <time>{{ post.publish }}</time>
+                </div>
+              </div><!-- End recent post item-->
+              {% endfor %}
+            </div><!--/Recent Posts Widget -->
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+<script src="{% static 'article/js/ajax_option.js' %}"></script>
+    
+
+{% endblock %}
