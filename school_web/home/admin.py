@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Ekstrakurikuler
+
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug', 'author', 'publish', 'status']
@@ -10,4 +11,8 @@ class PostAdmin(admin.ModelAdmin):
     date_hierarchy = 'publish'
     ordering = ['status', 'publish']
     show_facets = admin.ShowFacets.ALWAYS
-    
+
+@admin.register(Ekstrakurikuler)
+class EkstrakurikulerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'instagram', 'facebook', 'youtube', 'tiktok', 'twitter')
+    search_fields = ('name',)

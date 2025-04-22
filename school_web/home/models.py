@@ -71,3 +71,13 @@ class Post(models.Model):
                 self.slug,
             ],
         )
+    
+class Ekstrakurikuler(models.Model):
+    name = models.CharField(max_length=250)
+    deskripsi = models.TextField()
+    instagram = models.CharField(max_length=250)
+    facebook = models.CharField(max_length=250)
+    youtube = models.CharField(max_length=250)
+    tiktok = models.CharField(max_length=250)
+    twitter = models.CharField(max_length=250)
+    image = models.ImageField(upload_to='ekstrakurikuler/', default='ekstrakurikuler/default.jpg')
