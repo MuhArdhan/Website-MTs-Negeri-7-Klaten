@@ -12,10 +12,11 @@
                 <button class="bg-gray-800 text-white font-bold px-6 py-2 rounded-full">Cari</button>
             </div>
         </div>
-    </section>
-
+    </section> 
+    <div class="bg-green-700 w-full h-2"></div>
     <!-- Berita Terbaru -->
-    <section id="trending-category" class="py-12">
+    <section id="trending-category" class="py-30 bg-white">
+      
     <div class="text-4xl text-center font-bold text-gray-800">Berita Terbaru</div>
     <div class="flex justify-center mt-2 pb-24">
         <div class="w-10 h-1 bg-gray-800 mx-1"></div>
@@ -54,17 +55,19 @@
         {% endfor %}
         </div>
     </div>
+    
     </section>
+    <div class="bg-green-700 w-full h-2"></div>
 
     <!-- Gelombang Atas -->
     <div class="relative -mt-1 drop-shadow-2xl/100">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#ffffff" fill-opacity="1" d="M0,224L80,202.7C160,181,320,139,480,112C640,85,800,75,960,80C1120,85,1280,107,1360,117.3L1440,128L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
-        </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#ffffff" fill-opacity="1" d="M0,288L120,272C240,256,480,224,720,224C960,224,1200,256,1320,272L1440,288L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path>
+      </svg>
     </div>
 
 <!-- Ekstrakurikuler -->
-<section id="ekstrakurikuler" class="bg-white pb-16 relative z-50">
+<section id="ekstrakurikuler" class="bg-white relative z-50">
   <div class="text-4xl text-center font-bold text-gray-800">Ekstrakurikuler</div>
   <div class="flex justify-center mt-2 mb-10">
     <div class="w-10 h-1 bg-gray-800 mx-1"></div>
@@ -90,25 +93,20 @@
     <div class="swiper-wrapper">
       {% for eskul in ekstrakurikuler %}
       <div class="swiper-slide px-4 py-6 bg-white rounded-lg shadow-md">
-        <div class="max-w-3xl mx-auto">
-          <div class="flex flex-col md:flex-row items-center md:items-start md:justify-center gap-2">
-            
+        <div class=" mx-auto">
+          <div class="flex flex-col md:flex-row items-center md:items-start md:justify-center">
             <!-- Kiri -->
-            <div class="md:w-2/5 text-center md:text-left flex flex-col justify-center items-center md:items-start">
-              <img src="{{ eskul.image.url }}" alt="{{ eskul.name }}" class="w-36 h-36 object-contain">
-              <h2 class="text-2xl font-bold text-gray-800 mt-4">{{ eskul.name|upper }}</h2>
-              <p class="text-gray-600 text-lg">{{ eskul.deskripsi|truncatewords:5 }}</p>
-              <a href="{{ eskul.get_absolute_url }}" class="inline-flex items-center px-4 py-2 mt-4 border border-green-500 text-green-600 font-semibold rounded-full hover:bg-green-500 hover:text-white transition">
-                SELENGKAPNYA
-                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </a>
+            <div class="md:w-2/5 flex flex-col items-center justify-center text-center">
+              <!-- Container untuk gambar dan teks -->
+              <div class="w-full flex flex-col items-center">
+                <img src="{{ eskul.image.url }}" alt="{{ eskul.name }}" class="w-100 h-100 object-cover">
+                <h2 class="text-2xl font-bold text-gray-800 mt-4">{{ eskul.name|upper }}</h2>
+              </div>
             </div>
 
             <!-- Kanan -->
-            <div class="md:w-2/5 flex flex-col justify-center items-center">
-              <img src="{{ eskul.image.url }}" alt="{{ eskul.name }}" class="w-40 h-40 object-contain">
+            <div class="md:w-2/5 h-full flex flex-col justify-center items-center text-center p-4 self-center">
+              <p class="text-gray-600 text-lg">{{ eskul.deskripsi }}</p>
               <h3 class="text-lg font-semibold text-gray-800 mt-4">Selengkapnya Tentang {{ eskul.name }}</h3>
               <p class="text-gray-700 font-semibold mb-2">Media Sosial:</p>
               <div class="flex justify-center space-x-4 mt-2">
