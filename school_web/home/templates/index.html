@@ -187,7 +187,7 @@
       </div>
     
       <div class="max-w-5xl mx-auto space-y-12 px-4">
-        {% for post in prestasi_posts %}
+        {% for post in prestasi_posts|slice:":2" %}
       <div class="flex flex-col md:flex-row items-start bg-white text-gray-800 rounded-lg overflow-hidden shadow-md">
         
         <!-- Gambar -->

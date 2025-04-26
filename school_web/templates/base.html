@@ -7,7 +7,9 @@
   <title>{% block title %}Blog{% endblock %}</title>
   {% load static %}
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  
 </head>
 
 <body class="bg-[url('/static/assets/img/background.png')] bg-contain">
@@ -53,20 +55,61 @@
   <footer class="bg-gray-800 text-white p-6">
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
   
-      <!-- Kolom 1: Logo Atas Bawah -->
-      <div class="flex items-center space-y-4">
-        <img src="{% static 'assets/logo/logo-mts.png' %}" alt="Logo 1" class="w-50 h-50 object-contain">
-        <h1 class="text-3xl font-bold">MTs NEGERI 7 KLATEN</h1>
+      <div class="flex flex-col">
+        <!-- Logo + Teks (sejajar) -->
+        <div class="flex items-center space-x-4">
+          <img src="{% static 'assets/logo/logo-mts.png' %}" alt="Logo 1" class="w-40 h-40 object-contain">
+          <h1 class="text-3xl font-bold">MTs NEGERI 7 KLATEN</h1>
+        </div>
+      
+        <!-- Garis Strip di bawah -->
+        <div class="w-full border-b border-gray-700 my-5"></div>
+        <div class="text-2xl">{{ profile.alamat }}</div>
+        <div class="text-2xl">{{ profile.telepon }}</div>
+        <div class="text-2xl">{{ profile.email }}</div>
+        <div class="w-full border-b border-gray-700 my-5"></div>
+        <div class="flex space-x-4">
+          <!-- Facebook -->
+          <a href="#" class="group flex items-center justify-center w-12 h-12 rounded-full border border-gray-400 hover:bg-blue-500 transition">
+            <i class="fab fa-facebook-f text-white group-hover:scale-110 transition-transform"></i>
+          </a>
+          <!-- Instagram -->
+          <a href="#" class="group flex items-center justify-center w-12 h-12 rounded-full border border-gray-400 hover:bg-pink-500 transition">
+            <i class="fab fa-instagram text-white group-hover:scale-110 transition-transform"></i>
+          </a>
+          <!-- X (Twitter) -->
+          <a href="#" class="group flex items-center justify-center w-12 h-12 rounded-full border border-gray-400 hover:bg-black transition">
+            <i class="fab fa-x-twitter text-white group-hover:scale-110 transition-transform"></i>
+          </a>
+          <!-- YouTube -->
+          <a href="#" class="group flex items-center justify-center w-12 h-12 rounded-full border border-gray-400 hover:bg-red-600 transition">
+            <i class="fab fa-youtube text-white group-hover:scale-110 transition-transform"></i>
+          </a>
+        </div>
       </div>
-  
       <!-- Kolom 2: Kontak Info -->
       <div class="text-center md:text-left">
         
-        <h2 class="text-3xl font-bold mb-2">Contact</h2>
-        <p class="text-2xl font-bold">Alamat: </p><span class="text-2xl">{{ profile.alamat }}</span>
-        <p class="text-2xl font-bold">Telepon: </p><span class="text-2xl">{{ profile.telepon }}</span>
-        <p class="text-2xl font-bold">Email: </p><span class="text-2xl">{{ profile.email }}</p>
-   
+        <div class="text-white p-8 max-w-3xl">
+          <h1 class="text-2xl font-bold mb-8">INFO SEKOLAH</h1>
+          
+          {% for post in info_posts|slice:":2" %}
+          <div class="space-y-8">
+            <div class="flex items-start space-x-4 pb-8 border-b border-gray-700">
+              <div class="w-24 h-24 bg-white rounded flex items-center justify-center overflow-hidden flex-shrink-0">
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="w-full h-full object-cover">
+              </div>
+              
+              <div class="flex-1">
+                <a href="{{ post.get_absolute_url }}" class="text-lg font-bold text-yellow-400">{{ post.title|truncatewords:2 }}<a/>
+                <p class="text-sm mt-1">{{ post.created|date:"d M Y" }}</p>
+                <p class="mt-4">{{ post.body|truncatewords:10 }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        
       </div>
   
       <!-- Kolom 3: Google Maps -->
@@ -83,7 +126,7 @@
   
     </div>
   
-    <p class="text-center mt-6 text-sm">&copy; 2024 DjangoBlog. All Rights Reserved.</p>
+    <p class="text-center mt-6 text-sm">&copy; Copyright 2025. All Rights Reserved</p>
   </footer>
 
   <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>

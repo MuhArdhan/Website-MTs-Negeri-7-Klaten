@@ -10,6 +10,7 @@ def index(request):
     ekstrakurikuler = Ekstrakurikuler.objects.all()
     profile = Profile.objects.first()
     prestasi_posts = Post.published.filter(category=Post.Category.PRESTASI)
+    info_posts = Post.published.filter(category=Post.Category.INFO)
     tendik = TenagaPendidik.objects.all()
     paginator = Paginator(post, 4)
     page_number = request.GET.get('page', 1)
@@ -47,5 +48,6 @@ def index(request):
         'profile': profile,
         'prestasi_posts': prestasi_posts,
         'tendik': tendik,
+        'info_posts': info_posts
     }
     return render(request, 'index.html', context)
