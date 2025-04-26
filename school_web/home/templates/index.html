@@ -55,7 +55,7 @@
 
     <!-- Berita Terbaru -->
     <section id="postingan-terbaru" class="py-30 bg-gray-800">
-      <div class="text-4xl text-center font-bold text-white">Berita Terbaru</div>
+      <div class="text-4xl text-center font-bold text-white">Postingan Terbaru</div>
       <div class="flex justify-center mt-2 pb-24">
           <div class="w-10 h-1 bg-yellow-500 mx-1"></div>
           <div class="w-10 h-1 bg-yellow-500 mx-1"></div>
@@ -107,8 +107,8 @@
     <section id="ekstrakurikuler" class="bg-white relative z-50">
       <div class="text-4xl text-center font-bold text-gray-800">Ekstrakurikuler</div>
       <div class="flex justify-center mt-2 mb-10">
-        <div class="w-10 h-1 bg-gray-800 mx-1"></div>
-        <div class="w-10 h-1 bg-gray-800 mx-1"></div>
+        <div class="w-10 h-1 bg-yellow-500 mx-1"></div>
+        <div class="w-10 h-1 bg-yellow-500 mx-1"></div>
       </div>
 
       <div class="swiper init-swiper">
@@ -178,12 +178,34 @@
         </svg>
     </div>
 
-    <section id="prestasi-terbaru" class="py-30 bg-gray-800">
-      <div class="text-4xl text-center font-bold text-white">Prestasi Terbaru</div>
-      <div class="flex justify-center mt-2 pb-24">
-          <div class="w-10 h-1 bg-yellow-500 mx-1"></div>
-          <div class="w-10 h-1 bg-yellow-500 mx-1"></div>
+    <section id="prestasi-terbaru" class="py-30 bg-gray-800 text-white">
+      <div class="text-4xl text-center font-bold">Prestasi Terbaru</div>
+      <div class="flex justify-center mt-2 pb-12">
+        <div class="w-10 h-1 bg-yellow-500 mx-1"></div>
+        <div class="w-10 h-1 bg-yellow-500 mx-1"></div>
       </div>
+    
+      <div class="max-w-5xl mx-auto space-y-12 px-4">
+        {% for post in prestasi_posts %}
+  <div class="flex flex-col md:flex-row items-start bg-white text-gray-800 rounded-lg overflow-hidden shadow-md">
+    
+    <!-- Gambar -->
+    <div class="md:w-1/3 w-full">
+      <img src="{{ post.image.url }}" alt="{{ post.title }}" class="w-full h-full object-cover">
+    </div>
 
+    <!-- Detail -->
+    <div class="md:w-2/3 w-full p-6">
+      <h3 class="text-2xl font-semibold mb-2">{{ post.title }}</h3>
+      <p class="text-sm text-gray-600 mb-4">{{ post.created|date:"d M Y" }}</p>
+      <p class="text-gray-700">{{ post.body|truncatewords:40 }}</p>
+      <a href="{{ post.get_absolute_url }}" class="inline-block mt-4 text-yellow-600 hover:underline">Selengkapnya →</a>
+    </div>
+
+  </div>
+{% empty %}
+  <p class="text-center text-gray-300">Belum ada prestasi yang ditampilkan.</p>
+{% endfor %}
+      </div>
     </section>
 {% endblock %}
