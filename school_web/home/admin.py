@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Ekstrakurikuler, Profile
+from .models import Post, Ekstrakurikuler, Profile, TenagaPendidik
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -23,3 +23,8 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('email', 'alamat', 'telepon')
     list_filter = ('kode_pos',)
     ordering = ('email',)
+
+@admin.register(TenagaPendidik)
+class TenagaPendidikAdmin(admin.ModelAdmin):
+    list_display = ('name', 'jabatan')
+    search_fields = ('name', 'jabatan')

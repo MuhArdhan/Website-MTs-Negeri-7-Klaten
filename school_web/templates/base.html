@@ -50,31 +50,40 @@
     {% block content %}{% endblock %}
   </main>
 
-  <footer class="bg-gray-800 text-white mt-10 p-6">
-    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div>
-        <h2 class="text-lg font-bold">DjangoBlog</h2>
-        <p>Teknik Informatika, Universitas Muhammadiyah Surakarta</p>
-        <p><strong>Phone:</strong> +62 5589 55488 55</p>
-        <p><strong>Email:</strong> DjangoBlog@example.com</p>
+  <footer class="bg-gray-800 text-white p-6">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+  
+      <!-- Kolom 1: Logo Atas Bawah -->
+      <div class="flex items-center space-y-4">
+        <img src="{% static 'assets/logo/logo-mts.png' %}" alt="Logo 1" class="w-50 h-50 object-contain">
+        <h1 class="text-3xl font-bold">MTs NEGERI 7 KLATEN</h1>
       </div>
-      <div>
-        <h3 class="text-lg font-semibold">Useful Links</h3>
-        <ul class="space-y-2">
-          <li><a href="#" class="hover:underline">Home</a></li>
-          <li><a href="" class="hover:underline">About us</a></li>
-        </ul>
+  
+      <!-- Kolom 2: Kontak Info -->
+      <div class="text-center md:text-left">
+        
+        <h2 class="text-3xl font-bold mb-2">Contact</h2>
+        <p class="text-2xl font-bold">Alamat: </p><span class="text-2xl">{{ profile.alamat }}</span>
+        <p class="text-2xl font-bold">Telepon: </p><span class="text-2xl">{{ profile.telepon }}</span>
+        <p class="text-2xl font-bold">Email: </p><span class="text-2xl">{{ profile.email }}</p>
+   
       </div>
-      <div>
-        <h3 class="text-lg font-semibold">Follow Us</h3>
-        <div class="flex space-x-4">
-          <a href="#" class="hover:text-gray-400">Twitter</a>
-          <a href="#" class="hover:text-gray-400">Facebook</a>
-          <a href="#" class="hover:text-gray-400">Instagram</a>
-        </div>
+  
+      <!-- Kolom 3: Google Maps -->
+      <div class="flex justify-center">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.5264751320483!2d110.59229097476432!3d-7.626388092389173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a420c96bab41d%3A0x3819d14a00d45779!2sMTs%20Negeri%207%20Klaten%20Kab.%20Klaten!5e0!3m2!1sid!2sid!4v1745670325283!5m2!1sid!2sid" 
+          width="600" 
+          height="450" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
+  
     </div>
-    <p class="text-center mt-6">&copy; 2024 DjangoBlog. All Rights Reserved.</p>
+  
+    <p class="text-center mt-6 text-sm">&copy; 2024 DjangoBlog. All Rights Reserved.</p>
   </footer>
 
   <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>

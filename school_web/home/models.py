@@ -47,7 +47,7 @@ class Post(models.Model):
         default=Category.AGENDA
     )
 
-    image = models.ImageField(upload_to='blog/',  default='blog/default.jpg')
+    image = models.ImageField(upload_to='post/',  default='post/default.jpg')
 
     objects = models.Manager()  # The default manager.
     published = PublishedManager()  # Our custom manager.
@@ -93,3 +93,21 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"Profile - {self.email}"
+    
+class TenagaPendidik(models.Model):
+    name = models.CharField(max_length=250)
+    jabatan = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='tenaga_pendidik/', default='tenaga_pendidik/default.jpg')
+
+    def __str__(self):
+        return self.name
+    
+class KotakSaran(models.Model):
+    nama = models.CharField(max_length=100)
+    email = models.EmailField()
+    telepon = models.CharField(max_length=20, blank=True)
+    pesan = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Saran dari {self.nama}"
