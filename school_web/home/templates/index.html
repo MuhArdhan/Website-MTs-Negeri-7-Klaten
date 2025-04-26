@@ -12,52 +12,89 @@
                 <button class="bg-gray-800 text-white font-bold px-6 py-2 rounded-full">Cari</button>
             </div>
         </div>
-    </section> 
-    <div class="bg-green-700 w-full h-2"></div>
-    <!-- Berita Terbaru -->
-    <section id="trending-category" class="py-30 bg-white">
-      
-    <div class="text-4xl text-center font-bold text-gray-800">Berita Terbaru</div>
-    <div class="flex justify-center mt-2 pb-24">
-        <div class="w-10 h-1 bg-gray-800 mx-1"></div>
-        <div class="w-10 h-1 bg-gray-800 mx-1"></div>
-    </div>
-    <div class="container mx-auto px-4" data-aos="fade-up" data-aos-delay="100">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {% for post in post %}
-        <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <a href="{{ post.get_absolute_url }}">
-            <img src="{{ post.image.url }}" alt="" class="w-full h-48 object-cover">
-            </a>
-            <div class="p-4">
-            <div class="text-sm text-gray-500">
-                <span class="text-green-700 font-semibold">{{ post.category }}</span>
-                <span class="mx-1">•</span>
-                <span>{{ post.publish }}</span>
-            </div>
-            <h2 class="text-lg font-semibold mt-2">
-                <a href="{{ post.get_absolute_url }}" class="text-gray-800 hover:text-blue-600">{{ post.title }}</a>
-            </h2>
-            <p class="text-sm text-gray-600 mt-1">Tags: {{ post.tags.all|join:", " }}</p>
-            <p class="text-gray-700 mt-2">{{ post.body|truncatewords:20 }}</p>
-            <div class="flex items-center mt-4">
-                {% if post.author.profile.image %}
-                <img src="{{ post.author.profile.image.url }}" alt="" class="w-10 h-10 rounded-full object-cover">
-                {% else %}
-                <img src="{% static 'assets/default.jpg' %}" alt="" class="w-10 h-10 rounded-full object-cover">
-                {% endif %}
-                <div class="ml-3">
-                <h3 class="text-sm font-semibold text-gray-800">{{ post.author }}</h3>
-                </div>
-            </div>
-            </div>
-        </div>
-        {% endfor %}
-        </div>
-    </div>
-    
     </section>
+
     <div class="bg-green-700 w-full h-2"></div>
+
+    <section id="visi-misi" class="py-30 bg-white">
+      <div class="text-4xl text-center font-bold text-gray-800">Visi dan Misi</div>
+      <div class="flex justify-center mt-2 pb-15">
+        <div class="w-10 h-1 bg-yellow-500 mx-1"></div>
+        <div class="w-10 h-1 bg-yellow-500 mx-1"></div>
+      </div>
+      <div class="max-w-4xl mx-auto space-y-12">
+  
+        <!-- Visi -->
+        <div class="flex items-start gap-4">
+          <img src="{% static 'assets/logo/logo-mts.png' %}" alt="Logo MTS" class="w-50 h-50 object-contain">
+          <div class="text-left self-center">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">Visi</h2>
+            <p class="text-gray-600">
+              {{ profile.visi }}
+            </p>
+          </div>
+        </div>
+      
+        <!-- Misi -->
+        <div class="flex items-start gap-10 justify-end text-justify">
+          <div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">Misi</h2>
+            <ul class="list-disc list-inside text-gray-600 space-y-1">
+              {% for item in profile.misi.splitlines %}
+                <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <img src="{% static 'assets/logo/madrasah.png' %}" alt="Logo Madrasah" class="w-50 h-50 self-center object-contain">
+        </div>
+      
+      </div>
+    </section>
+    
+    <div class="bg-green-700 w-full h-2"></div>
+
+    <!-- Berita Terbaru -->
+    <section id="postingan-terbaru" class="py-30 bg-gray-800">
+      <div class="text-4xl text-center font-bold text-white">Berita Terbaru</div>
+      <div class="flex justify-center mt-2 pb-24">
+          <div class="w-10 h-1 bg-yellow-500 mx-1"></div>
+          <div class="w-10 h-1 bg-yellow-500 mx-1"></div>
+      </div>
+      <div class="container mx-auto px-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {% for post in post %}
+          <div class="bg-white shadow-md rounded-lg overflow-hidden">
+              <a href="{{ post.get_absolute_url }}">
+              <img src="{{ post.image.url }}" alt="" class="w-full h-48 object-cover">
+              </a>
+              <div class="p-4">
+              <div class="text-sm text-gray-500">
+                  <span class="text-green-700 font-semibold">{{ post.category }}</span>
+                  <span class="mx-1">•</span>
+                  <span>{{ post.publish }}</span>
+              </div>
+              <h2 class="text-lg font-semibold mt-2">
+                  <a href="{{ post.get_absolute_url }}" class="text-gray-800 hover:text-blue-600">{{ post.title }}</a>
+              </h2>
+              <p class="text-sm text-gray-600 mt-1">Tags: {{ post.tags.all|join:", " }}</p>
+              <p class="text-gray-700 mt-2">{{ post.body|truncatewords:20 }}</p>
+              <div class="flex items-center mt-4">
+                  {% if post.author.profile.image %}
+                  <img src="{{ post.author.profile.image.url }}" alt="" class="w-10 h-10 rounded-full object-cover">
+                  {% else %}
+                  <img src="{% static 'assets/default.jpg' %}" alt="" class="w-10 h-10 rounded-full object-cover">
+                  {% endif %}
+                  <div class="ml-3">
+                  <h3 class="text-sm font-semibold text-gray-800">{{ post.author }}</h3>
+                  </div>
+              </div>
+              </div>
+          </div>
+          {% endfor %}
+          </div>
+      </div> 
+    </section>
+    
 
     <!-- Gelombang Atas -->
     <div class="relative -mt-1 drop-shadow-2xl/100">
@@ -66,76 +103,74 @@
       </svg>
     </div>
 
-<!-- Ekstrakurikuler -->
-<section id="ekstrakurikuler" class="bg-white relative z-50">
-  <div class="text-4xl text-center font-bold text-gray-800">Ekstrakurikuler</div>
-  <div class="flex justify-center mt-2 mb-10">
-    <div class="w-10 h-1 bg-gray-800 mx-1"></div>
-    <div class="w-10 h-1 bg-gray-800 mx-1"></div>
-  </div>
-
-  <div class="swiper init-swiper">
-    <script type="application/json" class="swiper-config">
-      {
-        "loop": true,
-        "speed": 600,
-        "autoplay": {
-          "delay": 5000
-        },
-        "slidesPerView": 1,
-        "navigation": {
-          "nextEl": ".swiper-button-next",
-          "prevEl": ".swiper-button-prev"
-        }
-      }
-    </script>
-
-    <div class="swiper-wrapper">
-      {% for eskul in ekstrakurikuler %}
-      <div class="swiper-slide px-4 py-6 bg-white rounded-lg shadow-md">
-        <div class=" mx-auto">
-          <div class="flex flex-col md:flex-row items-center md:items-start md:justify-center">
-            <!-- Kiri -->
-            <div class="md:w-2/5 flex flex-col items-center justify-center text-center">
-              <!-- Container untuk gambar dan teks -->
-              <div class="w-full flex flex-col items-center">
-                <img src="{{ eskul.image.url }}" alt="{{ eskul.name }}" class="w-100 h-100 object-cover">
-                <h2 class="text-2xl font-bold text-gray-800 mt-4">{{ eskul.name|upper }}</h2>
-              </div>
-            </div>
-
-            <!-- Kanan -->
-            <div class="md:w-2/5 h-full flex flex-col justify-center items-center text-center p-4 self-center">
-              <p class="text-gray-600 text-lg">{{ eskul.deskripsi }}</p>
-              <h3 class="text-lg font-semibold text-gray-800 mt-4">Selengkapnya Tentang {{ eskul.name }}</h3>
-              <p class="text-gray-700 font-semibold mb-2">Media Sosial:</p>
-              <div class="flex justify-center space-x-4 mt-2">
-                {% if eskul.instagram %}
-                <a href="{{ eskul.instagram }}" target="_blank" class="bg-red-100 p-2 rounded-full text-red-500 hover:bg-red-200 transition">
-                  <i class="fab fa-instagram"></i>
-                </a>
-                {% endif %}
-                {% if eskul.facebook %}
-                <a href="{{ eskul.facebook }}" target="_blank" class="bg-green-100 p-2 rounded-full text-green-500 hover:bg-green-200 transition">
-                  <i class="fas fa-user"></i>
-                </a>
-                {% endif %}
-              </div>
-            </div>
-
-          </div>
-        </div>
+    <!-- Ekstrakurikuler -->
+    <section id="ekstrakurikuler" class="bg-white relative z-50">
+      <div class="text-4xl text-center font-bold text-gray-800">Ekstrakurikuler</div>
+      <div class="flex justify-center mt-2 mb-10">
+        <div class="w-10 h-1 bg-gray-800 mx-1"></div>
+        <div class="w-10 h-1 bg-gray-800 mx-1"></div>
       </div>
-      {% endfor %}
-    </div>
 
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
-</section>
+      <div class="swiper init-swiper">
+        <script type="application/json" class="swiper-config">
+          {
+            "loop": true,
+            "speed": 600,
+            "autoplay": {
+              "delay": 5000
+            },
+            "slidesPerView": 1,
+            "navigation": {
+              "nextEl": ".swiper-button-next",
+              "prevEl": ".swiper-button-prev"
+            }
+          }
+        </script>
 
-  
-  
+        <div class="swiper-wrapper">
+          {% for eskul in ekstrakurikuler %}
+          <div class="swiper-slide px-4 py-6 bg-white rounded-lg shadow-md">
+            <div class=" mx-auto">
+              <div class="flex flex-col md:flex-row items-center md:items-start md:justify-center">
+                <!-- Kiri -->
+                <div class="md:w-2/5 flex flex-col items-center justify-center text-center">
+                  <!-- Container untuk gambar dan teks -->
+                  <div class="w-full flex flex-col items-center">
+                    <img src="{{ eskul.image.url }}" alt="{{ eskul.name }}" class="w-100 h-100 object-cover">
+                    <h2 class="text-2xl font-bold text-gray-800 mt-4">{{ eskul.name|upper }}</h2>
+                  </div>
+                </div>
+
+                <!-- Kanan -->
+                <div class="md:w-2/5 h-full flex flex-col justify-center items-center text-center p-4 self-center">
+                  <p class="text-gray-600 text-lg">{{ eskul.deskripsi }}</p>
+                  <h3 class="text-lg font-semibold text-gray-800 mt-4">Selengkapnya Tentang {{ eskul.name }}</h3>
+                  <p class="text-gray-700 font-semibold mb-2">Media Sosial:</p>
+                  <div class="flex justify-center space-x-4 mt-2">
+                    {% if eskul.instagram %}
+                    <a href="{{ eskul.instagram }}" target="_blank" class="bg-red-100 p-2 rounded-full text-red-500 hover:bg-red-200 transition">
+                      <i class="fab fa-instagram"></i>
+                    </a>
+                    {% endif %}
+                    {% if eskul.facebook %}
+                    <a href="{{ eskul.facebook }}" target="_blank" class="bg-green-100 p-2 rounded-full text-green-500 hover:bg-green-200 transition">
+                      <i class="fas fa-user"></i>
+                    </a>
+                    {% endif %}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </section>
+
     <!-- Gelombang Bawah -->
     <div class="relative -mt-1 drop-shadow-2xl/20">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -143,22 +178,12 @@
         </svg>
     </div>
 
-    <div class="swiper-wrapper">
-        {% for eskul in ekstrakurikuler %}
-        <div class="swiper-slide bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row items-center gap-6">
-          
-          <!-- Kiri: Gambar dan Nama -->
-          <div class="flex-shrink-0 text-center">
-            <img src="{{ eskul.image.url }}" alt="{{ eskul.name }}" class="w-24 h-24 object-cover rounded-full mx-auto mb-2">
-            <h2 class="text-xl font-bold text-gray-800 mt-2">{{ eskul.name }}</h2>
-          </div>
-      
-          <!-- Kanan: Deskripsi -->
-          <div class="flex-1 text-gray-600">
-            <p>{{ eskul.deskripsi|truncatewords:30 }}</p>
-          </div>
-      
-        </div>
-        {% endfor %}
+    <section id="prestasi-terbaru" class="py-30 bg-gray-800">
+      <div class="text-4xl text-center font-bold text-white">Prestasi Terbaru</div>
+      <div class="flex justify-center mt-2 pb-24">
+          <div class="w-10 h-1 bg-yellow-500 mx-1"></div>
+          <div class="w-10 h-1 bg-yellow-500 mx-1"></div>
       </div>
+
+    </section>
 {% endblock %}

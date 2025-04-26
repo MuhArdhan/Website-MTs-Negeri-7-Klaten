@@ -81,3 +81,15 @@ class Ekstrakurikuler(models.Model):
     tiktok = models.CharField(max_length=250)
     twitter = models.CharField(max_length=250)
     image = models.ImageField(upload_to='ekstrakurikuler/', default='ekstrakurikuler/default.jpg')
+
+class Profile(models.Model):
+    visi = models.TextField()
+    misi = models.TextField()
+    alamat = models.CharField(max_length=255)
+    kode_pos = models.CharField(max_length=10)
+    telepon = models.CharField(max_length=15)
+    email = models.EmailField()
+    instagram = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Profile - {self.email}"
