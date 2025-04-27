@@ -14,16 +14,15 @@
 
 <body class="bg-[url('/static/assets/img/background.png')] bg-contain">
 
-
   <header class="bg-gray-800 shadow-md fixed w-full top-0 z-55">
     <div class="container mx-auto flex items-center justify-between p-3.5">
         <div class="flex items-center space-x-2"> 
-            <a href="" class="w-16 mr-2.5"><img src="{% static 'assets/logo/logo-mts.png' %}" alt=""></a>
-            <a href="" class="w-20"><img src="{% static 'assets/logo/madrasah.png' %}" alt=""></a>
+            <a href="{% url 'home:home' %}" class="w-16 mr-2.5"><img src="{% static 'assets/logo/logo-mts.png' %}" alt=""></a>
+            <a href="{% url 'home:home' %}" class="w-20"><img src="{% static 'assets/logo/madrasah.png' %}" alt=""></a>
         </div>
 
         <nav class="hidden md:flex space-x-6">
-            <a href="" class="text-white hover:text-blue-500">Home</a>
+            <a href="{% url 'home:home' %}" class="text-white hover:text-blue-500">Home</a>
             <a href="" class="text-white hover:text-blue-500">About</a>
             <a href="" class="text-white hover:text-blue-500">All Posts</a>
             {% if user.is_authenticated %}
@@ -33,17 +32,27 @@
       
       {% if user.is_authenticated %}
       <div class="relative">
-        <button class="flex items-center space-x-2 bg-gray-200 px-4 py-2 rounded-lg">
+        <button id="profileButton" class="flex items-center space-x-2 bg-gray-200 px-4 py-2 rounded-lg">
           {% if user.profile.profile_picture %}
           <img src="{{ user.profile.profile_picture.url }}" alt="{{ user.username }}" class="w-8 h-8 rounded-full">
           {% else %}
           <img src="{% static 'assets/default.jpg' %}" alt="{{ user.username }}" class="w-8 h-8 rounded-full">
           {% endif %}
           <span>{{ user.username | truncatechars:8 }}</span>
+          <i class="fas fa-chevron-down text-xs ml-1"></i>
         </button>
+        
+        <!-- Dropdown Menu -->
+        <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-20 hidden">
+          <div class="py-1">
+            <a href="{% url 'login:logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              <i class="fas fa-sign-out-alt mr-2"></i>Logout
+            </a>
+          </div>
+        </div>
       </div>
       {% else %}
-      <a href="" class="bg-green-700 text-white px-4 py-2 rounded-lg">Login</a>
+      <a href="{% url 'login:admin_login' %}" class="bg-green-700 text-white px-4 py-2 rounded-lg">Login</a>
       {% endif %}
     </div>
   </header>
@@ -132,6 +141,28 @@
   <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
   <script src="{% static 'assets/js/main.js' %}"></script>
   
+  <!-- Script untuk dropdown -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const profileButton = document.getElementById('profileButton');
+      const dropdown = document.getElementById('profileDropdown');
+      
+      if (profileButton && dropdown) {
+        // Toggle dropdown saat tombol profil diklik
+        profileButton.addEventListener('click', function(event) {
+          event.stopPropagation();
+          dropdown.classList.toggle('hidden');
+        });
+        
+        // Menutup dropdown ketika mengklik di luar
+        document.addEventListener('click', function(event) {
+          if (!profileButton.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.classList.add('hidden');
+          }
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
