@@ -12,9 +12,9 @@ def index(request):
     prestasi_posts = Post.published.filter(category=Post.Category.PRESTASI)
     info_posts = Post.published.filter(category=Post.Category.INFO)
     tendik = TenagaPendidik.objects.all()
-    paginator = Paginator(post, 4)
+    paginator_post = Paginator(post, 4)
     page_number = request.GET.get('page', 1)
-    post = paginator.page(page_number)
+    post = paginator_post.page(page_number)
     form = KotakSaranForm()
 
     # cek success dari GET parameter
