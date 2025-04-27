@@ -12,39 +12,73 @@
   
 </head>
 
-<body class="bg-[url('/static/assets/img/background.png')] bg-contain">
+<body class="bg-[url('/static/assets/img/background.png')] bg-contain scroll-auto">
 
 
-  <header class="bg-gray-800 shadow-md fixed w-full top-0 z-55">
-    <div class="container mx-auto flex items-center justify-between p-3.5">
-        <div class="flex items-center space-x-2"> 
-            <a href="" class="w-16 mr-2.5"><img src="{% static 'assets/logo/logo-mts.png' %}" alt=""></a>
-            <a href="" class="w-20"><img src="{% static 'assets/logo/madrasah.png' %}" alt=""></a>
-        </div>
-
-        <nav class="hidden md:flex space-x-6">
-            <a href="" class="text-white hover:text-blue-500">Home</a>
-            <a href="" class="text-white hover:text-blue-500">About</a>
-            <a href="" class="text-white hover:text-blue-500">All Posts</a>
-            {% if user.is_authenticated %}
-            <a href="" class="text-white hover:text-blue-500">Add</a>
-            {% endif %}
-        </nav>
+  <header class="bg-gray-800 shadow-md fixed w-full top-0 z-50">
+    <div class="container mx-auto flex items-center justify-between px-6 py-4">
       
-      {% if user.is_authenticated %}
-      <div class="relative">
-        <button class="flex items-center space-x-2 bg-gray-200 px-4 py-2 rounded-lg">
-          {% if user.profile.profile_picture %}
-          <img src="{{ user.profile.profile_picture.url }}" alt="{{ user.username }}" class="w-8 h-8 rounded-full">
-          {% else %}
-          <img src="{% static 'assets/default.jpg' %}" alt="{{ user.username }}" class="w-8 h-8 rounded-full">
-          {% endif %}
-          <span>{{ user.username | truncatechars:8 }}</span>
-        </button>
+      <!-- Logo -->
+      <div class="flex items-center space-x-3">
+        <a href="{% url 'home:home' %}" class="flex items-center space-x-2">
+          <img src="{% static 'assets/logo/logo-mts.png' %}" alt="Logo MTs" class="w-12 h-12 object-contain">
+          <img src="{% static 'assets/logo/madrasah.png' %}" alt="Madrasah" class="w-16 h-16 object-contain">
+        </a>
       </div>
-      {% else %}
-      <a href="" class="bg-green-700 text-white px-4 py-2 rounded-lg">Login</a>
-      {% endif %}
+  
+      <!-- Navigation -->
+      <nav class="hidden md:flex items-center space-x-8 text-white">
+        
+        <!-- Home dengan dropdown -->
+        <div class="relative group">
+          <button class="flex items-center space-x-1 hover:text-blue-400">
+            <a href="{% url 'home:home' %}">Home</a>
+            <svg class="w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="absolute left-0 mt-2 w-56 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+            <a href="#visi-misi" class="block px-4 py-3 hover:bg-gray-100">Visi Misi</a>
+            <a href="#postingan-terbaru" class="block px-4 py-3 hover:bg-gray-100">Postingan Terbaru</a>
+            <a href="#ekstrakurikuler" class="block px-4 py-3 hover:bg-gray-100">Ekstrakurikuler</a>
+            <a href="#prestasi-terbaru" class="block px-4 py-3 hover:bg-gray-100">Prestasi Terbaru</a>
+            <a href="#tenaga-pendidik" class="block px-4 py-3 hover:bg-gray-100">Tenaga Pendidik</a>
+            <a href="#kotak-saran" class="block px-4 py-3 hover:bg-gray-100">Kotak Saran</a>
+          </div>
+        </div>
+  
+        <!-- About -->
+        <a href="#" class="hover:text-blue-400">About</a>
+  
+        <!-- All Posts -->
+        <a href="#" class="hover:text-blue-400">All Posts</a>
+  
+        {% if user.is_authenticated %}
+        <!-- Add Post -->
+        <a href="#" class="hover:text-blue-400">Add</a>
+        {% endif %}
+      </nav>
+  
+      <!-- User Profile / Login Button -->
+      <div class="flex items-center space-x-4">
+        {% if user.is_authenticated %}
+        <div class="relative">
+          <button class="flex items-center space-x-2 bg-gray-200 px-4 py-2 rounded-full hover:bg-gray-300">
+            {% if user.profile.profile_picture %}
+            <img src="{{ user.profile.profile_picture.url }}" alt="{{ user.username }}" class="w-8 h-8 rounded-full object-cover">
+            {% else %}
+            <img src="{% static 'assets/default.jpg' %}" alt="{{ user.username }}" class="w-8 h-8 rounded-full object-cover">
+            {% endif %}
+            <span class="font-medium text-gray-800">{{ user.username|truncatechars:8 }}</span>
+          </button>
+        </div>
+        {% else %}
+        <a href="{% url 'login' %}" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-full font-semibold transition">
+          Login
+        </a>
+        {% endif %}
+      </div>
+  
     </div>
   </header>
 
