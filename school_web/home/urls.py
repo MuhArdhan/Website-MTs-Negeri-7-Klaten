@@ -6,6 +6,7 @@ app_name = 'home'
 
 urlpatterns = [
     path('', views.index , name='home'),
+    path('all-posts/', views.all_posts, name='all_posts'),
 ]
 
 if settings.DEBUG:
