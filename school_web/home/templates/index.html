@@ -104,7 +104,7 @@
     </div>
 
     <!-- Ekstrakurikuler -->
-    <section id="ekstrakurikuler" class="bg-white relative z-50">
+    <section id="ekstrakurikuler" class="bg-white relative z-40">
       <div class="text-4xl text-center font-bold text-gray-800">Ekstrakurikuler</div>
       <div class="flex justify-center mt-2 mb-10 pt-3">
         <div class="w-10 h-1 bg-yellow-500 mx-1"></div>
@@ -222,18 +222,21 @@
         <script type="application/json" class="swiper-config">
           {
             "loop": true,
-            "speed": 600,
+            "speed": 5000, 
             "autoplay": {
-              "delay": 5000
+              "delay": 0,
+              "disableOnInteraction": false
             },
-            "slidesPerView": 7
+            "slidesPerView": 7,
+            "freeMode": true,
+            "freeModeMomentum": false
           }
-        </script>
+          </script>
     
         <div class="swiper-wrapper">
           {% for tendik in tendik %}
           <div class="swiper-slide flex flex-col items-center">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden w-64">
+            <div class="bg-white rounded-lg border border-gray-200 overflow-hidden w-64">
               <img src="{{ tendik.image.url }}" alt="{{ tendik.name }}" class="w-full h-48 object-cover">
               <div class="p-4 text-center">
                 <h3 class="text-lg font-bold text-gray-800">{{ tendik.name }}</h3>
