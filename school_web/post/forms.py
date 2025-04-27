@@ -7,7 +7,7 @@ class PostForm(forms.ModelForm):
         fields = ['title', 'slug', 'body', 'publish', 'status', 'category', 'image']
 
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter title'}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter title',}),
             'slug': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter slug'}),
             'body': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
             'publish': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control', 'readonly': 'readonly'}),

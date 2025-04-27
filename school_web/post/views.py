@@ -174,7 +174,9 @@ def post_update(request, year, month, day, slug):
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
-            return redirect(reverse('article:detail', args=[post.publish.year, post.publish.month, post.publish.day, post.slug]))
+            return redirect(reverse('post:detail', args=[post.publish.year, post.publish.month, post.publish.day, post.slug]))
+        else:
+            print(form.errors)  # Debugging form errors
     else:
         form = PostForm(instance=post)
 
