@@ -13,13 +13,13 @@
             <label for="search" class="text-gray-700 font-medium mr-2">Search Posts:</label>
             <input type="text" name="search" id="search" value="{{ search_query }}" 
                 class="border rounded-lg px-4 py-2" placeholder="Enter title">
-            <button type="submit" class="ml-2 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-600">
+            <button type="submit" class="ml-2 px-4 py-2 bg-green-800 text-white rounded-lg hover:bg-green-600">
                 Search
             </button>
         </form>
 
         <!-- Form Filter -->
-        <form method="get">
+        <form method="get" class="mb-6 text-center">
             <label for="category" class="text-gray-700 font-medium mr-2">Filter by Category:</label>
             <select name="category" id="category" class="border rounded-lg px-4 py-2">
                 <option value="">All Categories</option>
@@ -33,6 +33,8 @@
                 Filter
             </button>
         </form>
+                
+
     </div>
 
     <!-- Grid Post Display -->
