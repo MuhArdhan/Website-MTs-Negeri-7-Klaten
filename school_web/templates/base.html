@@ -14,46 +14,81 @@
 
 <body class="bg-[url('/static/assets/img/background.png')] bg-contain">
 
-  <header class="bg-gray-800 shadow-md fixed w-full top-0 z-55">
-    <div class="container mx-auto flex items-center justify-between p-3.5">
-        <div class="flex items-center space-x-2"> 
-            <a href="{% url 'home:home' %}" class="w-16 mr-2.5"><img src="{% static 'assets/logo/logo-mts.png' %}" alt=""></a>
-            <a href="{% url 'home:home' %}" class="w-20"><img src="{% static 'assets/logo/madrasah.png' %}" alt=""></a>
-        </div>
-
-        <nav class="hidden md:flex space-x-6">
-            <a href="{% url 'home:home' %}" class="text-white hover:text-blue-500">Home</a>
-            <a href="" class="text-white hover:text-blue-500">About</a>
-            <a href="{% url 'home:all_posts' %}" class="text-white hover:text-blue-500">All Posts</a>
-            {% if user.is_authenticated %}
-            <a href="{% url 'post:post_create' %}" class="text-white hover:text-blue-500">Add</a>
-            {% endif %}
-        </nav>
+  <header class="bg-gray-800 shadow-md fixed w-full top-0 z-50">
+    <div class="container mx-auto flex items-center justify-between px-6 py-4">
       
-      {% if user.is_authenticated %}
-      <div class="relative">
-        <button id="profileButton" class="flex items-center space-x-2 bg-gray-200 px-4 py-2 rounded-lg">
-          {% if user.profile.profile_picture %}
-          <img src="{{ user.profile.profile_picture.url }}" alt="{{ user.username }}" class="w-8 h-8 rounded-full">
-          {% else %}
-          <img src="{% static 'assets/default.jpg' %}" alt="{{ user.username }}" class="w-8 h-8 rounded-full">
-          {% endif %}
-          <span>{{ user.username | truncatechars:8 }}</span>
-          <i class="fas fa-chevron-down text-xs ml-1"></i>
-        </button>
+      <!-- Logo -->
+      <div class="flex items-center space-x-3">
+        <a href="{% url 'home:home' %}" class="flex items-center space-x-2">
+          <img src="{% static 'assets/logo/logo-mts.png' %}" alt="Logo MTs" class="w-12 h-12 object-contain">
+          <img src="{% static 'assets/logo/madrasah.png' %}" alt="Madrasah" class="w-16 h-16 object-contain">
+        </a>
+      </div>
+  
+      <!-- Navigation -->
+      <nav class="hidden md:flex items-center space-x-8 text-white">
         
-        <!-- Dropdown Menu -->
-        <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-20 hidden">
-          <div class="py-1">
-            <a href="{% url 'login:logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-              <i class="fas fa-sign-out-alt mr-2"></i>Logout
-            </a>
+        <!-- Home dengan dropdown -->
+        <div class="relative group">
+          <button class="flex items-center space-x-1 hover:text-blue-400">
+            <a href="{% url 'home:home' %}">Beranda</a>
+            <svg class="w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="absolute left-0 mt-2 w-56 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+            <a href="#postingan-terbaru" class="block px-4 py-3 hover:bg-gray-100">Postingan Terbaru</a>
+            <a href="#ekstrakurikuler" class="block px-4 py-3 hover:bg-gray-100">Ekstrakurikuler</a>
+            <a href="#prestasi-terbaru" class="block px-4 py-3 hover:bg-gray-100">Prestasi Terbaru</a>
+            <a href="#tendik" class="block px-4 py-3 hover:bg-gray-100">Tenaga Pendidik</a>
+            <a href="#kotak-saran" class="block px-4 py-3 hover:bg-gray-100">Kotak Saran</a>
           </div>
+        </div>
+  
+        <!-- About -->
+        <a href="#visi-misi" class="hover:text-blue-400">Visi dan Misi</a>
+  
+        <!-- All Posts -->
+        <a href="{% url 'home:all_posts' %}" class="hover:text-blue-400">Postingan</a>
+  
+        {% if user.is_authenticated %}
+        <!-- Add Post -->
+        <a href="{% url 'post:post_create' %}" class="hover:text-blue-400">Menambahkan Postingan</a>
+        {% endif %}
+      </nav>
+  
+    <!-- User Profile / Login Button -->
+    <div class="flex items-center space-x-4 relative">
+      {% if user.is_authenticated %}
+      <div class="relative group">
+        <!-- Trigger Button -->
+        <button class="flex items-center space-x-2 bg-gray-200 px-4 py-2 rounded-full hover:bg-gray-300 focus:outline-none">
+          {% if user.profile.profile_picture %}
+          <img src="{{ user.profile.profile_picture.url }}" alt="{{ user.username }}" class="w-8 h-8 rounded-full object-cover">
+          {% else %}
+          <img src="{% static 'assets/img/default.jpg' %}" alt="{{ user.username }}" class="w-8 h-8 rounded-full object-cover">
+          {% endif %}
+          <span class="font-medium text-gray-800">{{ user.username|truncatechars:8 }}</span>
+          <!-- Down Arrow Icon -->
+          <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <!-- Dropdown menu -->
+        <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200">
+          <a href="{% url 'login:logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+            <i class="fas fa-sign-out-alt mr-2"></i> Logout
+          </a>
         </div>
       </div>
       {% else %}
-      <a href="{% url 'login:admin_login' %}" class="bg-green-700 text-white px-4 py-2 rounded-lg">Login</a>
+      <a href="{% url 'login:admin_login' %}" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-full font-semibold transition">
+        Login
+      </a>
       {% endif %}
+    </div>
+  
     </div>
   </header>
 
@@ -79,19 +114,19 @@
         <div class="w-full border-b border-gray-700 my-5"></div>
         <div class="flex space-x-4">
           <!-- Facebook -->
-          <a href="#" class="group flex items-center justify-center w-12 h-12 rounded-full border border-gray-400 hover:bg-blue-500 transition">
+          <a href="https://www.facebook.com/groups/452214668205539/?ref=share&mibextid=NSMWBT" class="group flex items-center justify-center w-12 h-12 rounded-full border border-gray-400 hover:bg-black transition">
             <i class="fab fa-facebook-f text-white group-hover:scale-110 transition-transform"></i>
           </a>
           <!-- Instagram -->
-          <a href="#" class="group flex items-center justify-center w-12 h-12 rounded-full border border-gray-400 hover:bg-pink-500 transition">
+          <a href="https://www.instagram.com/mtsn7klaten?igsh=MWJxbncyZ2NxajgxMw==" class="group flex items-center justify-center w-12 h-12 rounded-full border border-gray-400 hover:bg-black transition">
             <i class="fab fa-instagram text-white group-hover:scale-110 transition-transform"></i>
           </a>
           <!-- X (Twitter) -->
-          <a href="#" class="group flex items-center justify-center w-12 h-12 rounded-full border border-gray-400 hover:bg-black transition">
-            <i class="fab fa-x-twitter text-white group-hover:scale-110 transition-transform"></i>
+          <a href="https://web.telegram.org/" class="group flex items-center justify-center w-12 h-12 rounded-full border border-gray-400 hover:bg-black transition">
+            <i class="fab fa-telegram text-white group-hover:scale-110 transition-transform"></i>
           </a>
           <!-- YouTube -->
-          <a href="#" class="group flex items-center justify-center w-12 h-12 rounded-full border border-gray-400 hover:bg-red-600 transition">
+          <a href="https://youtube.com/@mtsn7klaten824?si=5qI12uAoPsniL9SA" class="group flex items-center justify-center w-12 h-12 rounded-full border border-gray-400 hover:bg-black transition">
             <i class="fab fa-youtube text-white group-hover:scale-110 transition-transform"></i>
           </a>
         </div>

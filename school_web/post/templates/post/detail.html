@@ -37,14 +37,14 @@
                     {% if post.author.profile.profile_picture %}
                         <img src="{{ post.author.profile.profile_picture.url }}" alt="{{ post.author.username }}" class="w-20 h-20 rounded-full mx-auto mb-3">
                     {% else %}
-                        <img src="{% static 'assets/default.jpg' %}" alt="{{ post.author.username }}" class="w-20 h-20 rounded-full mx-auto mb-3">
+                        <img src="{% static 'assets/img/default.jpg' %}" alt="{{ post.author.username }}" class="w-20 h-20 rounded-full mx-auto mb-3">
                     {% endif %}
                     <h4 class="text-lg font-semibold">{{ post.author }}</h4>
                     <div class="flex justify-center space-x-4 mt-3">
-                        <a href="https://x.com/#" class="text-gray-600 hover:text-gray-800"><i class="bi bi-twitter-x"></i></a>
-                        <a href="https://facebook.com/#" class="text-gray-600 hover:text-gray-800"><i class="bi bi-facebook"></i></a>
-                        <a href="https://instagram.com/#" class="text-gray-600 hover:text-gray-800"><i class="bi bi-instagram"></i></a>
-                        <a href="https://linkedin.com/#" class="text-gray-600 hover:text-gray-800"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://x.com/#" class="text-gray-600 hover:text-gray-800"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com/#" class="text-gray-600 hover:text-gray-800"><i class="fab fa-facebook"></i></a>
+                        <a href="https://instagram.com/#" class="text-gray-600 hover:text-gray-800"><i class="fab fa-instagram"></i></a>
+                        <a href="https://linkedin.com/#" class="text-gray-600 hover:text-gray-800"><i class="fab fa-linkedin"></i></a>
                     </div>
                     <p class="text-sm text-gray-500 mt-2">Itaque quidem optio quia voluptatibus dolorem dolor.</p>
                 </div>
