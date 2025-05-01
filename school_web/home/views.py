@@ -51,3 +51,27 @@ def index(request):
         'info_posts': info_posts
     }
     return render(request, 'index.html', context)
+
+def all_posts(request):
+    category = request.GET.get('category')  # Ambil parameter kategori dari URL
+    search_query = request.GET.get('search')  # Ambil parameter pencarian dari URL
+    
+    # Mengambil semua data awal
+    posts = Post.objects.all()
+    if category:
+        posts = posts.filter(category=category)  # Filter berdasarkan kategori
+    if search_query:
+        posts = posts.filter(title__icontains=search_query)  # Filter berdasarkan pencarian
+    
+    # Ambil hanya kategori unik dengan distinct()
+    categories = Post.objects.order_by('category').values_list('category', flat=True).distinct()
+    
+    return render(request, 'post/all_posts.html', {
+        'posts': posts,
+        'categories': categories,
+        'selected_category': category,
+        'search_query': search_query,
+    })
+
+
+
