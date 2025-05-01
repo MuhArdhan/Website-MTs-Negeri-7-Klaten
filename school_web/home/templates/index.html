@@ -5,15 +5,17 @@
 
     <!-- Hero Section with Parallax Effect -->
     <section class="relative w-full h-screen bg-fixed bg-center bg-cover flex flex-col justify-center items-center text-center" style="background-image: url('{% static "assets/img/hero.jpeg" %}');">
-        <h1 class="text-5xl font-bold text-white drop-shadow-lg" style="text-shadow: 2px 2px 4px black">MTs NEGERI 7 KLATEN</h1>
-        <div class="mt-4 w-full flex justify-center">
-            <div class="flex bg-white shadow-lg rounded-full w-1/2 p-3 items-center">
-                <input type="text" placeholder="Cari..." class="flex-1 outline-none px-4 py-2 rounded-full">
-                <button class="bg-gray-800 text-white font-bold px-6 py-2 rounded-full">Cari</button>
-            </div>
-        </div>
-    </section>
-
+      <h1 class="text-5xl font-bold text-white drop-shadow-lg" style="text-shadow: 2px 2px 4px black">
+          MTs NEGERI 7 KLATEN
+      </h1>
+      <div class="mt-4 w-full flex justify-center">
+          <!-- Form pencarian -->
+          <form method="get" action="{% url 'home:all_posts' %}" class="flex bg-white shadow-lg rounded-full w-1/2 p-3 items-center">
+              <input type="text" name="search" placeholder="Cari..." class="flex-1 outline-none px-4 py-2 rounded-full">
+              <button type="submit" class="bg-gray-800 text-white font-bold px-6 py-2 rounded-full">Cari</button>
+          </form>
+      </div>
+  </section>
     <div class="bg-green-700 w-full h-2"></div>
 
     <section id="visi-misi" class="py-30 bg-white">
